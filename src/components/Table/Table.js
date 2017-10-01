@@ -17,6 +17,7 @@ const Table = () => (
       </View>
       <Seat
         displayName="Johny"
+        reversed={true}
         imgUrl="https://orig13.deviantart.net/014b/f/2011/107/9/b/johnny_bravo_by_theeyzmaster-d3e81im.jpg"
       />
     </View>
