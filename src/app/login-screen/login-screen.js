@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {View, Button, KeyboardAvoidingView, TextInput, Text} from 'react-native';
+import {View, Button, TextInput, Text, Image} from 'react-native';
 import styles from './styles';
 
-export default class Home extends React.Component {
+export default class LoginScreen extends React.Component {
   static navigationOptions = {
     title: 'Enter email'
   };
@@ -27,26 +27,19 @@ export default class Home extends React.Component {
   render() {
     const {navigate} = this.props.navigation;
     return (
-      <KeyboardAvoidingView
-        style={styles.container}
-        behavior="padding"
-        keyboardVerticalOffset={65}
-      >
-        <View>
-          <Text>Header</Text>
-        </View>
-        <View style={styles.body}>
-          <Text>Hello</Text>
-          {/*<TextInput*/}
-          {/*label="Email"*/}
-          {/*placeholder="eg@email.com"*/}
-          {/*autoFocus*/}
-          {/*/>*/}
-        </View>
-        <View>
-          <Text>Footer</Text>
-        </View>
-      </KeyboardAvoidingView>
+      <Image
+        style={styles.background}
+        source={{uri: 'https://www.excalibur.com/content/dam/MGM/excalibur/casino/poker/excalibur-casino-poker-chips.tif'}}>
+        <View style={styles.container}>
+          <View style={styles.buttonWrapper}>
+            <Button
+              color="white"
+              title="Login"
+              onPress={f => navigate('Table')}
+            />
+          </View>
+        </View >
+      </Image>
     );
   }
 }

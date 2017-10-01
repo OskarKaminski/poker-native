@@ -1,7 +1,7 @@
 import React from 'react';
+import {View, Text} from 'react-native'
 import PropTypes from 'prop-types';
-import {Symbol} from 'Component/symbol/symbol';
-import './card.css';
+import styles from './Card.styles';
 
 export const Card = (props) => {
 
@@ -12,26 +12,17 @@ export const Card = (props) => {
         14: 'A'
     };
 
-    const label = labels[props.data.value] || props.data.value;
+    const label = labels[props.value] || props.value;
 
     return (
-        <div className='card'>
-            <div className="card__left-top-corner">
-                {label}<Symbol symbol={props.data.symbol} />
-            </div>
-            <div className="card__right-top-corner">
-                {label}<Symbol symbol={props.data.symbol} />
-            </div>
-            <div className="card__left-down-corner">
-                {label}<Symbol symbol={props.data.symbol} />
-            </div>
-            <div className="card__right-down-corner">
-                {label}<Symbol symbol={props.data.symbol} />
-            </div>
-        </div>
+        <View style={styles.card}>
+            <View>
+              <Text style={styles.label}>{label}</Text>
+            </View>
+        </View>
     )
 };
 
 Card.propTypes = {
-    data: PropTypes.object.isRequired
+    value: PropTypes.string.isRequired
 };
