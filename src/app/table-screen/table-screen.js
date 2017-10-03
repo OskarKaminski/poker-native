@@ -17,13 +17,18 @@ class TableScreen extends React.Component {
     navigation: PropTypes.object.isRequired
   }
 
+  _onLayout(event) {
+    this.containerWidth = event.nativeEvent.layout.width;
+  }
+
   render() {
+
     const {navigate} = this.props.navigation;
     const {table} = this.props;
     return (
       <Image
-        style={styles.background}
-        source={{uri: 'http://urbanetrunkk.com/wp-content/themes/redcarpet/images/red-velvet-texture-background-hd.jpg'}}>
+        style={[styles.background, {width: this.containerWidth}]}
+        source={require('../../../assets/carpet.jpg')}>
         <View style={styles.tableScreen}>
           <View style={styles.tableTop}>
             <Icon
@@ -33,8 +38,8 @@ class TableScreen extends React.Component {
               onPress={() => navigate('Tables')}
             />
           </View>
-          <Table table={table}/>
-          <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+          <Table table={table} width={this.containerWidth}/>
+          <View style={styles.buttons}>
             <PokButton title="Fold" type="danger" onPress={f => f}/>
             <PokButton title="Call" type="primary" onPress={f => f}/>
             <PokButton title="Bet" type="success" onPress={f => f}/>
@@ -54,7 +59,7 @@ const TableFragmentContainer = createFragmentContainer(
   `,
 );
 
-const TablesFragmentQueryRenderer = ({ navigation }) => {
+const TablesFragmentQueryRenderer = ({navigation}) => {
   return (
     <QueryRenderer
       environment={environment}

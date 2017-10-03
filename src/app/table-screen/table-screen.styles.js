@@ -5,12 +5,14 @@ export default StyleSheet.create({
     flex: 1
   },
   background: {
-    resizeMode: 'cover',
+    resizeMode: 'stretch',
     flex: 1
   },
   tableTop: {
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
     backgroundColor: 'rgba(0, 0, 0, 0.4)'
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
   }
 });

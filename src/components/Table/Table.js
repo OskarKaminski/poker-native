@@ -2,22 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {View, Text, Image} from 'react-native';
 import styles from './Table.styles';
-import {Seat} from '../Seat/Seat'
+import Seat from '../Seat/Seat'
 import {
   graphql,
   createFragmentContainer
 } from 'react-relay';
 
-const Table = ({table}) => (
+const Table = ({table, width}) => (
   <Image
-    style={styles.background}
-    source={{uri: 'https://www.cardschat.com/resources/oddsCalc/img/field.png'}}>
-      {/*<View style={{position: 'absolute', left: 450}}>*/}
-        {/*<Seat*/}
-          {/*displayName={table.name}*/}
-          {/*imgUrl="http://www.wybieg.pl/pics/u/5025_img1_40ef4f3c9dbb7f99f1b849e2d91db3c9.jpg"*/}
-        {/*/>*/}
-      {/*</View>*/}
+    style={[styles.background, {width}]}
+    source={require('../../../assets/table.png')}>
       {
         table.players.map((player, key) => (
           <View
@@ -25,9 +19,8 @@ const Table = ({table}) => (
             key={player.id}
           >
             <Seat
-              displayName={player.profile.nickname}
+              player={player}
               reversed={!(key % 2)}
-              imgUrl={player.profile.imgUrl}
             />
           </View>
         ))
@@ -46,16 +39,7 @@ export default createFragmentContainer(
       name
       players{
         id
-        chips
-        profile{
-          id
-          nickname
-          imgUrl
-        }
-        cards{
-          color
-          value
-        }
+        ...Seat_player
       }
     }
   `,
