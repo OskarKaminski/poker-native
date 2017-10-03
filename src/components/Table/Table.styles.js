@@ -3,11 +3,17 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   seat: {
     position: 'absolute',
-    top: 40,
-    left: 30
+    left: 20
   },
   background: {
     resizeMode: 'contain',
     flex: 1
+  },
+  seat1: {},
+  seat2: {
+    left: 500
+  },
+  seat3: {
+    top: 150
   }
 });

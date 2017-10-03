@@ -5,14 +5,21 @@ import Table from '../../components/Table/Table'
 import PokButton from '../../components/Button/Button'
 import styles from './table-screen.styles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import {environment} from '../../adapters/relay-environment'
+import {
+  graphql,
+  createFragmentContainer,
+  QueryRenderer,
+} from 'react-relay';
 
-export default class TableScreen extends React.Component {
+class TableScreen extends React.Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired
   }
 
   render() {
     const {navigate} = this.props.navigation;
+    const {table} = this.props;
     return (
       <Image
         style={styles.background}
@@ -26,7 +33,7 @@ export default class TableScreen extends React.Component {
               onPress={() => navigate('Tables')}
             />
           </View>
-          <Table/>
+          <Table table={table}/>
           <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
             <PokButton title="Fold" type="danger" onPress={f => f}/>
             <PokButton title="Call" type="primary" onPress={f => f}/>
@@ -37,3 +44,43 @@ export default class TableScreen extends React.Component {
     );
   }
 }
+
+const TableFragmentContainer = createFragmentContainer(
+  TableScreen,
+  graphql`
+    fragment tableScreen_table on Table {
+      ...Table_table
+    }
+  `,
+);
+
+const TablesFragmentQueryRenderer = ({ navigation }) => {
+  return (
+    <QueryRenderer
+      environment={environment}
+      query={graphql`
+      query tableScreenQuery {
+        store{
+          table(id: "59abf1a01710ba3b74718220"){
+            ...tableScreen_table
+          }
+        }
+      }
+    `}
+      render={({error, props}) => {
+        if (props) {
+          return <TableFragmentContainer
+            navigation={navigation}
+            table={props.store.table}
+          />;
+        } else {
+          return (
+            <Text>Loading</Text>
+          )
+        }
+      }}
+    />
+  )
+};
+
+export default TablesFragmentQueryRenderer;
