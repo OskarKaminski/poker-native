@@ -15,5 +15,13 @@ export default StyleSheet.create({
   },
   seat3: {
     top: 150
+  },
+  seat4: {
+    top: 150,
+    left: 500
+  },
+  seat5: {
+    top: 250,
+    left: 250
   }
 });
