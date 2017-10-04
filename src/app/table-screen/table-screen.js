@@ -63,10 +63,11 @@ const TablesFragmentQueryRenderer = ({navigation}) => {
   return (
     <QueryRenderer
       environment={environment}
+      variables={{ID: navigation.state.params.id}}
       query={graphql`
-      query tableScreenQuery {
+      query tableScreenQuery($ID: String) {
         store{
-          table(id: "59abf1a01710ba3b74718220"){
+          table(id: $ID){
             ...tableScreen_table
           }
         }
