@@ -11,10 +11,12 @@ import {TablesListItem} from '../../components/TablesListItem/TablesListItem'
 import {environment} from '../../adapters/relay-environment'
 import JoinTableMutation from '../../mutations/JoinTableMutation'
 
+const userId = '59acf3be4b90740bbade93e7';
+
 class TablesScreen extends React.Component {
 
   joinTable = (tableId) => {
-    JoinTableMutation();
+    JoinTableMutation(userId, tableId);
     const {navigate} = this.props.navigation;
     navigate('Table', {id: tableId})
   }

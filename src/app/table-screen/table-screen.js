@@ -11,6 +11,9 @@ import {
   createFragmentContainer,
   QueryRenderer,
 } from 'react-relay';
+import ExitTableMutation from '../../mutations/ExitTableMutation'
+
+const userId = '59acf3be4b90740bbade93e7';
 
 class TableScreen extends React.Component {
   static propTypes = {
@@ -21,9 +24,12 @@ class TableScreen extends React.Component {
     this.containerWidth = event.nativeEvent.layout.width;
   }
 
-  render() {
+  onLeaveTable = () => {
+    ExitTableMutation(userId, this.props.table.id);
+    this.props.navigation.navigate('Tables')
+  }
 
-    const {navigate} = this.props.navigation;
+  render() {
     const {table} = this.props;
     return (
       <Image
@@ -35,7 +41,7 @@ class TableScreen extends React.Component {
               name="chevron-left"
               size={25}
               style={{color: 'white'}}
-              onPress={() => navigate('Tables')}
+              onPress={this.onLeaveTable}
             />
           </View>
           <Table table={table} width={this.containerWidth}/>
@@ -54,6 +60,7 @@ const TableFragmentContainer = createFragmentContainer(
   TableScreen,
   graphql`
     fragment tableScreen_table on Table {
+      id
       ...Table_table
     }
   `,

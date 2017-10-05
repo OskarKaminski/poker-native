@@ -2,14 +2,12 @@ import {graphql, commitMutation} from 'react-relay';
 import {environment} from '../adapters/relay-environment'
 
 const mutation = graphql`
-  mutation JoinTableMutation($userId : String, $tableId: String){
-    joinTable(profileId: $userId, tableId: $tableId){
-      id
-      chips
-      profile{
+  mutation ExitTableMutation($userId : String, $tableId: String){
+    exitTable(profileId: $userId, tableId: $tableId){
+      name
+      stake
+      players{
         id
-        nickname
-        imgUrl
       }
     }
   }
