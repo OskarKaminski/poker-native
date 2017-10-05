@@ -4,7 +4,9 @@
       "queryType": {
         "name": "RootQuery"
       },
-      "mutationType": null,
+      "mutationType": {
+        "name": "RootMutation"
+      },
       "subscriptionType": null,
       "types": [
         {
@@ -97,6 +99,29 @@
               "type": {
                 "kind": "OBJECT",
                 "name": "Table",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "player",
+              "description": "A specific player by id",
+              "args": [
+                {
+                  "name": "id",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Player",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -384,6 +409,50 @@
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootMutation",
+          "description": null,
+          "fields": [
+            {
+              "name": "joinTable",
+              "description": null,
+              "args": [
+                {
+                  "name": "tableId",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "profileId",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Player",
                 "ofType": null
               },
               "isDeprecated": false,

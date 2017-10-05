@@ -9,11 +9,17 @@ import {
 import styles from './styles';
 import {TablesListItem} from '../../components/TablesListItem/TablesListItem'
 import {environment} from '../../adapters/relay-environment'
+import JoinTableMutation from '../../mutations/JoinTableMutation'
 
 class TablesScreen extends React.Component {
 
-  render() {
+  joinTable = (tableId) => {
+    JoinTableMutation();
     const {navigate} = this.props.navigation;
+    navigate('Table', {id: tableId})
+  }
+
+  render() {
     const {tables} = this.props.store;
     return (
       <Image
@@ -24,7 +30,7 @@ class TablesScreen extends React.Component {
             tables.map((table, key) => (
               <TablesListItem
                 name={table.name}
-                onPress={() => navigate('Table', {id: table.id})}
+                onPress={() => this.joinTable(table.id)}
                 stake={+table.stake}
                 key={table.id}
               />
