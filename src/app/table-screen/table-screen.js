@@ -12,8 +12,7 @@ import {
   QueryRenderer,
 } from 'react-relay';
 import ExitTableMutation from '../../mutations/ExitTableMutation'
-
-const userId = '59acf3be4b90740bbade93e7';
+import Viewer from '../../adapters/Viewer';
 
 class TableScreen extends React.Component {
   static propTypes = {
@@ -25,7 +24,7 @@ class TableScreen extends React.Component {
   }
 
   onLeaveTable = () => {
-    ExitTableMutation(userId, this.props.table.id);
+    ExitTableMutation(Viewer.graphID, this.props.table.id);
     this.props.navigation.navigate('Tables')
   }
 

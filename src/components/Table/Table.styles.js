@@ -20,7 +20,7 @@ export default StyleSheet.create({
     top: 150,
     left: 500
   },
-  seat5: {
+  seatViewer: {
     top: 250,
     left: 250
   }

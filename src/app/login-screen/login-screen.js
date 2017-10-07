@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {View, Button, TextInput, Text, Image} from 'react-native';
 import styles from './styles';
+import Viewer from '../../adapters/Viewer'
 
 export default class LoginScreen extends React.Component {
   static navigationOptions = {
@@ -12,30 +13,41 @@ export default class LoginScreen extends React.Component {
     navigation: PropTypes.object.isRequired
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: ''
-    }
+  state = {
+    value: ''
   }
 
-  onEmailChange = value => {
-    const newValue = value.toLowerCase();
-    this.setState({value: newValue});
+  onNameChange = value => {
+    this.setState({value});
+  }
+
+  login = () => {
+    Viewer.nickname = this.state.value;
+    this.props.navigation.navigate('Tables');
   }
 
   render() {
-    const {navigate} = this.props.navigation;
     return (
       <Image
         style={styles.background}
         source={{uri: 'https://www.excalibur.com/content/dam/MGM/excalibur/casino/poker/excalibur-casino-poker-chips.tif'}}>
         <View style={styles.container}>
+          <View>
+            <TextInput
+              value={this.state.value}
+              onChangeText={this.onNameChange}
+              style={{
+                width: 100,
+                height: 30,
+                backgroundColor: 'white'
+              }}
+            />
+          </View>
           <View style={styles.buttonWrapper}>
             <Button
               color="white"
               title="Login"
-              onPress={f => navigate('Table')}
+              onPress={this.login}
             />
           </View>
         </View >

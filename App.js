@@ -11,7 +11,7 @@ const App = StackNavigator({
     Table: { screen: TableScreen }
   },
   {
-    initialRouteName: 'Tables',
+    initialRouteName: 'Login',
     headerMode: 'none',
     mode: Platform.OS === 'ios' ? 'modal' : 'card'
   }

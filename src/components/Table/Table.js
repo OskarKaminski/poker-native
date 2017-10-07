@@ -7,26 +7,33 @@ import {
   graphql,
   createFragmentContainer
 } from 'react-relay';
+import Viewer from '../../adapters/Viewer';
 
-const Table = ({table, width}) => (
-  <Image
-    style={[styles.background, {width}]}
-    source={require('../../../assets/table.png')}>
+const Table = ({table, width}) => {
+  return(
+    <Image
+      style={[styles.background, {width}]}
+      source={require('../../../assets/table.png')}>
       {
-        table.players.map((player, key) => (
-          <View
-            style={[styles.seat, styles['seat'+(key+1)]]}
-            key={player.id}
-          >
-            <Seat
-              player={player}
-              reversed={!(key % 2)}
-            />
-          </View>
-        ))
+        table.players.map((player, key) => {
+          const seatPosition = player.profile.id === Viewer.graphID ?
+            styles.seatViewer : styles['seat' + (key + 1)];
+          return(
+            <View
+              style={[styles.seat, seatPosition]}
+              key={player.id}
+            >
+              <Seat
+                player={player}
+                reversed={!(key % 2)}
+              />
+            </View>
+          )
+        })
       }
-  </Image>
-);
+    </Image>
+  );
+}
 
 // Table.propTypes = {
 //   table: PropTypes.object
@@ -35,12 +42,15 @@ const Table = ({table, width}) => (
 export default createFragmentContainer(
   Table,
   graphql`
-    fragment Table_table on Table {
-      name
-      players{
-        id
-        ...Seat_player
+      fragment Table_table on Table {
+          name
+          players{
+              id
+              profile{
+                  id
+              }
+              ...Seat_player
+          }
       }
-    }
   `,
 );
