@@ -5,22 +5,21 @@ import styles from './styles';
 import Viewer from '../../adapters/Viewer'
 
 export default class LoginScreen extends React.Component {
+  _onLayout(event) {
+    this.containerWidth = event.nativeEvent.layout.width;
+  }
   static navigationOptions = {
     title: 'Enter email'
   };
-
   static propTypes = {
     navigation: PropTypes.object.isRequired
   }
-
   state = {
     value: ''
   }
-
   onNameChange = value => {
     this.setState({value});
   }
-
   login = () => {
     Viewer.nickname = this.state.value;
     this.props.navigation.navigate('Tables');
@@ -29,8 +28,8 @@ export default class LoginScreen extends React.Component {
   render() {
     return (
       <Image
-        style={styles.background}
-        source={{uri: 'https://www.excalibur.com/content/dam/MGM/excalibur/casino/poker/excalibur-casino-poker-chips.tif'}}>
+        style={[styles.background, {width: this.containerWidth}]}
+        source={require('../../../assets/chips.jpg')}>
         <View style={styles.container}>
           <View>
             <TextInput

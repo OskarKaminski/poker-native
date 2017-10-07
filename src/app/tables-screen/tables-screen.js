@@ -13,6 +13,9 @@ import JoinTableMutation from '../../mutations/JoinTableMutation'
 import Viewer from '../../adapters/Viewer';
 
 class TablesScreen extends React.Component {
+  _onLayout(event) {
+    this.containerWidth = event.nativeEvent.layout.width;
+  }
 
   joinTable = (tableId) => {
     JoinTableMutation(Viewer.graphID, tableId);
@@ -24,8 +27,8 @@ class TablesScreen extends React.Component {
     const {tables} = this.props.store;
     return (
       <Image
-        style={styles.background}
-        source={{uri: 'https://www.excalibur.com/content/dam/MGM/excalibur/casino/poker/excalibur-casino-poker-chips.tif'}}>
+        style={[styles.background, {width: this.containerWidth}]}
+        source={require('../../../assets/chips.jpg')}>
         <View style={styles.container}>
           {
             tables.map((table, key) => (
